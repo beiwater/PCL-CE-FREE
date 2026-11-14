@@ -59,8 +59,9 @@ PCL CE 始終建議使用最新版本的作業系統以獲得最佳體驗。
 
 ## 🔒 授權條款
 
-- `Plain Craft Launcher 2/` 使用 [自訂授權條款](https://github.com/PCL-Community/PCL-CE/blob/dev/Plain%20Craft%20Launcher%202/LICENCE)
-- `其餘所有目錄` 使用 [Apache License 2.0](https://github.com/PCL-Community/PCL-CE/blob/dev/LICENSE)
+- `Plain Craft Launcher 2/` 保留原[自訂授權條款](Plain%20Craft%20Launcher%202/LICENCE)，不在本次授權變更範圍內。
+- 原 Apache-2.0 涵蓋的其餘部分，其在本分支的衍生版本以 [GNU AGPL v3.0 only（AGPL-3.0-only）](LICENSE) 散布。此授權聲明由 beiwater 於 2026-11-14 修改。
+- 上游原有 Apache-2.0 授權不被撤銷；完整條文保留於 [LICENSE-APACHE-2.0](LICENSE-APACHE-2.0)。既有著作權、署名與明確單獨標註的第三方授權維持不變，相依套件不因此改證。
 
 ## 🌟 統計資料
 ![Alt](https://repobeats.axiom.co/api/embed/3e46296e6e3a134991a783480fd2f62723bb0353.svg "Repobeats analytics image")

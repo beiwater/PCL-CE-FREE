@@ -59,8 +59,9 @@ You can still try using the latest launcher version on unsupported platforms, bu
 
 ## 🔒 License
 
-- `Plain Craft Launcher 2/` uses [Custom License](https://github.com/PCL-Community/PCL-CE/blob/dev/Plain%20Craft%20Launcher%202/LICENCE)
-- `All other directories` use [Apache License 2.0](https://github.com/PCL-Community/PCL-CE/blob/dev/LICENSE)
+- `Plain Craft Launcher 2/` retains its [Custom License](Plain%20Craft%20Launcher%202/LICENCE) and is excluded from this license change.
+- The derivative version of the remaining, previously Apache-2.0-covered portions in this fork is distributed under [GNU AGPL v3.0 only (AGPL-3.0-only)](LICENSE). This licensing notice was modified by beiwater on 2026-11-14.
+- Upstream Apache-2.0 grants are not revoked; the original text is retained in [LICENSE-APACHE-2.0](LICENSE-APACHE-2.0). Existing copyright, attribution and explicitly identified third-party licenses remain intact; dependencies are not relicensed.
 
 ## 🌟 Statistic
 ![Alt](https://repobeats.axiom.co/api/embed/3e46296e6e3a134991a783480fd2f62723bb0353.svg "Repobeats analytics image")

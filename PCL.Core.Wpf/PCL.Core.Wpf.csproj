@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <!-- PCL.Core 的 WPF 适配层：仅包含依赖 WPF 的通用控件、效果与工具，目标为 Apache-2.0。 -->
+    <!-- PCL.Core 的 WPF 适配层：仅包含依赖 WPF 的通用控件、效果与工具；本分支衍生版本以 AGPL-3.0-only 分发，保留上游 Apache-2.0 声明。 -->
     <PropertyGroup>
         <AssemblyTitle>PCL.Core.Wpf</AssemblyTitle>
         <AssemblyName>PCL.Core.Wpf</AssemblyName>

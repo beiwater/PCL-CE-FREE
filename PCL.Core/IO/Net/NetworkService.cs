@@ -68,7 +68,7 @@ public partial class NetworkService
         services.ConfigureHttpClientDefaults(b => b
             .ConfigurePrimaryHttpMessageHandler(_GetSocketsHttpHandler)
             .ConfigureHttpClient(c => c.DefaultRequestHeaders
-                .UserAgent.Add(new ProductInfoHeaderValue("PCL-CE", Basics.VersionName)))
+                .UserAgent.Add(new ProductInfoHeaderValue("PCL-CE", Basics.Metadata.Version.BaseVersion)))
             .SetHandlerLifetime(TimeSpan.FromMinutes(LifeTime)));
         
         // 默认的 HTTP Client
@@ -79,7 +79,8 @@ public partial class NetworkService
 
         services.AddHttpClient(CurseForgeApi).ConfigureHttpClient(c =>
         {
-            c.DefaultRequestHeaders.Add("x-api-key", Secrets.CurseForgeAPIKey);
+            if (!string.IsNullOrWhiteSpace(Secrets.CurseForgeAPIKey))
+                c.DefaultRequestHeaders.Add("x-api-key", Secrets.CurseForgeAPIKey);
             c.BaseAddress = new Uri(CurseForgeApiServer);
         });
         

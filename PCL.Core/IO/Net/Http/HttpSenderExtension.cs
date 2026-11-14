@@ -3,6 +3,7 @@ using PCL.Core.Logging;
 using PCL.Core.Utils.Exts;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,9 +26,9 @@ public static class HttpSenderExtension
 
             if(addMetedata)
             {
-                request
-                    .WithHeader("User-Agent", $"PCL-Community/PCL2-CE/{Basics.VersionName} (pclc.cc)")
-                    .WithHeader("Referer", $"https://{Basics.VersionCode}.ce.open.pcl2.server/");
+                request.Headers.UserAgent.Add(new ProductInfoHeaderValue("PCL-CE", Basics.Metadata.Version.BaseVersion));
+                request.Headers.UserAgent.Add(new ProductInfoHeaderValue("(pclc.cc)"));
+                request.WithHeader("Referer", $"https://{Basics.VersionCode}.ce.open.pcl2.server/");
             }
 
             var requestId = Guid.NewGuid().ToString();

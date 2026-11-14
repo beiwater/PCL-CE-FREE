@@ -2,6 +2,7 @@ using PCL.Core.App;
 using PCL.Core.Logging;
 using PCL.Core.Utils.Encryption;
 using PCL.Core.Utils.Exts;
+using PCL.Core.Utils.OS;
 using PlainToolkit.CngProtectedData;
 using System;
 using System.Buffers.Binary;
@@ -150,7 +151,7 @@ public static class EncryptHelper
 
     /// <summary>
     /// 用户密钥。只在成功获取后缓存——失败不会被记住，下次访问会重新尝试。<br/>
-    /// 注意：密钥文件的 version（1 = 旧版 CAPI DPAPI，2 = CNG DPAPI）与
+    /// 注意：密钥文件的 version（1 = CAPI DPAPI，2 = CNG DPAPI）与
     /// <see cref="SecretEncrypt"/> 的数据算法 version（0/1/2）语义无关。
     /// </summary>
     internal static byte[] EncryptionKey
@@ -186,17 +187,19 @@ public static class EncryptHelper
         return _CreateKey(keyFile);
     }
 
-    /// <summary>读取密钥；v1 密钥会在解密成功后惰性迁移为 v2。内容不可用时抛出。</summary>
+    /// <summary>读取密钥。原生 Windows 上解密成功的 v1 密钥会尝试迁移为 v2。</summary>
     private static byte[] _ReadKey(string keyFile)
     {
         var data = EncryptionData.FromBytes(File.ReadAllBytes(keyFile));
         switch (data.Version)
         {
+            case 2 when NtInterop.IsWine:
+                throw new InvalidOperationException("当前 Wine 环境无法读取 CNG DPAPI 保护的用户密钥");
             case 2:
                 return CngProtectedData.Unprotect(data.Data, _Key, DataProtectionScope.CurrentUser);
             case 1:
                 var legacyKey = ProtectedData.Unprotect(data.Data, _Key, System.Security.Cryptography.DataProtectionScope.CurrentUser);
-                if (_TryProtect(legacyKey, out var migrated) && _WriteKeyFile(keyFile, migrated))
+                if (!NtInterop.IsWine && _TryProtect(legacyKey, out var migrated) && _WriteKeyFile(keyFile, migrated))
                     LogWrapper.Info("Encryption", $"用户密钥已迁移至 version 2（CNG DPAPI）：{keyFile}");
                 return legacyKey;
             default:
@@ -209,33 +212,46 @@ public static class EncryptHelper
     {
         var key = new byte[32];
         RandomNumberGenerator.Fill(key);
-        if (!_TryProtect(key, out var storeData))
+        var version = NtInterop.IsWine ? 1u : 2u;
+        if (!_TryProtect(key, out var storeData, version))
             throw new InvalidOperationException("本机 DPAPI 不可用，无法创建用户密钥");
         _QuarantineBrokenKeyFile(keyFile); // 已确认能重建，才动原文件
         if (!_WriteKeyFile(keyFile, storeData))
             LogWrapper.Error("Encryption", $"用户密钥写入失败，本次运行仅使用内存密钥：{keyFile}");
         else
-            LogWrapper.Warn("Encryption", "用户密钥已重建（version 2）。旧密钥保护的数据无法恢复，需要重新登录。");
+            LogWrapper.Warn("Encryption", $"用户密钥已重建（version {version}）。旧密钥保护的数据无法恢复，需要重新登录。");
         return key;
     }
 
     /// <summary>
-    /// 用 CNG DPAPI 保护密钥，并确认这份密文能读回原密钥后，才序列化为可落盘的字节。<br/>
+    /// 用 DPAPI 保护密钥，并确认这份密文能读回原密钥后，才序列化为可落盘的字节。<br/>
     /// 读不回说明本机 DPAPI 不可用或该 provider 不接受当前参数——此时宁可失败也不落盘，
     /// 否则下次启动照样解不开，会退化成「每次启动换一把钥匙」。
     /// </summary>
-    private static bool _TryProtect(byte[] rawKey, out byte[] storeData)
+    private static bool _TryProtect(byte[] rawKey, out byte[] storeData, uint version = 2)
     {
         try
         {
-            var blob = CngProtectedData.Protect(rawKey, _Key, DataProtectionScope.CurrentUser);
-            var roundTrip = CngProtectedData.Unprotect(blob, _Key, DataProtectionScope.CurrentUser);
-            storeData = EncryptionData.ToBytes(new EncryptionData { Version = 2, Data = blob });
+            byte[] blob;
+            byte[] roundTrip;
+            if (version == 1)
+            {
+                const System.Security.Cryptography.DataProtectionScope scope =
+                    System.Security.Cryptography.DataProtectionScope.CurrentUser;
+                blob = ProtectedData.Protect(rawKey, _Key, scope);
+                roundTrip = ProtectedData.Unprotect(blob, _Key, scope);
+            }
+            else
+            {
+                blob = CngProtectedData.Protect(rawKey, _Key, DataProtectionScope.CurrentUser);
+                roundTrip = CngProtectedData.Unprotect(blob, _Key, DataProtectionScope.CurrentUser);
+            }
+            storeData = EncryptionData.ToBytes(new EncryptionData { Version = version, Data = blob });
             return rawKey.AsSpan().SequenceEqual(roundTrip);
         }
         catch (Exception ex)
         {
-            LogWrapper.Warn(ex, "Encryption", "CNG DPAPI 自检失败，本机可能无法保存用户密钥");
+            LogWrapper.Warn(ex, "Encryption", $"DPAPI 自检失败（version {version}），本机可能无法保存用户密钥");
             storeData = [];
             return false;
         }

@@ -78,10 +78,7 @@ public static partial class Comp
         JsonArray resultJsonArray;
         if (fromCurseForge)
         {
-            var response = GameDownload.DlModRequest<JsonObject>(
-                $"https://api.curseforge.com/v1/mods/{projectId}/files?pageSize=10000");
-            resultJsonArray = response["data"] as JsonArray
-                ?? throw new InvalidOperationException("CurseForge 文件列表数据无效。");
+            resultJsonArray = _FetchCurseForgeFiles(projectId);
         }
         else
         {
@@ -98,6 +95,34 @@ public static partial class Comp
                 .GroupBy(a => a.Id)
                 .Select(g => g.First())
         ];
+    }
+
+    private static JsonArray _FetchCurseForgeFiles(string projectId)
+    {
+        var url = $"https://api.curseforge.com/v1/mods/{projectId}/files";
+        if (!string.IsNullOrWhiteSpace(Secrets.CurseForgeAPIKey))
+        {
+            var response = GameDownload.DlModRequest<JsonObject>($"{url}?pageSize=10000");
+            return response["data"] as JsonArray
+                ?? throw new InvalidOperationException("CurseForge 文件列表数据无效。");
+        }
+
+        // 镜像的大响应容易超时，分批读取并保留旧版本。
+        var files = new JsonArray();
+        const int pageSize = 500;
+        for (var index = 0; index < 10000;)
+        {
+            var response = GameDownload.DlModRequest<JsonObject>($"{url}?pageSize={pageSize}&index={index}");
+            var page = response["data"] as JsonArray
+                ?? throw new InvalidOperationException("CurseForge 文件列表数据无效。");
+            foreach (var file in page)
+                files.Add(file?.DeepClone());
+
+            index += page.Count;
+            var totalCount = response["pagination"]?["totalCount"]?.GetValue<int>() ?? index;
+            if (page.Count == 0 || index >= totalCount) break;
+        }
+        return files;
     }
 
     private static void _LoadMissingDependencyProjects(

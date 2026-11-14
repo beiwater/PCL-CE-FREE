@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
 using PCL.Core.App;
 using PCL.Core.App.Essentials;
 using PCL.Core.App.IoC;
@@ -25,6 +27,8 @@ internal static class Program
         }
 #endif
         Console.WriteLine("Welcome to Plain Craft Launcher 2 Community Edition!");
+        if (NtInterop.IsWine)
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
         // Preloading tasks
         ApplicationService.Loading = static () =>
         {

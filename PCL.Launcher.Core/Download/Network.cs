@@ -29,45 +29,15 @@ public static partial class GameDownload
     /// </summary>
     public static T DlModRequest<T>(string url)
     {
-        var urls = new List<KeyValuePair<string, int>>();
-        var mcimUrl = DlSourceModGet(url);
-        if (mcimUrl is not null && mcimUrl != url)
-            switch (Config.Download.Comp.CompSourceSolution)
-            {
-                case 0:
-                {
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 5));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 10));
-                    urls.Add(new KeyValuePair<string, int>(url, 15));
-                    break;
-                }
-                case 1:
-                {
-                    urls.Add(new KeyValuePair<string, int>(url, 5));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 5));
-                    urls.Add(new KeyValuePair<string, int>(url, 15));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 10));
-                    break;
-                }
-
-                default:
-                {
-                    urls.Add(new KeyValuePair<string, int>(url, 5));
-                    urls.Add(new KeyValuePair<string, int>(url, 15));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 10));
-                    break;
-                }
-            }
-
-        var exs = "";
-        foreach (var source in urls)
+        var errors = new List<Exception>();
+        foreach (var source in _GetModRequestSources(url, Config.Download.Comp.CompSourceSolution))
             try
             {
                 var json = Requester.FetchString(
-                    source.Key,
+                    source.Url,
                     new RequestParam
                     {
-                        Timeout = source.Value * 1000,
+                        Timeout = source.TimeoutSeconds * 1000,
                         UseBrowserUserAgent = true
                     });
                 return typeof(T) == typeof(string)
@@ -76,10 +46,10 @@ public static partial class GameDownload
             }
             catch (Exception ex)
             {
-                if (!ex.Message.ContainsF("mcimirror")) exs += $"{ex.Message}\r\n";
+                errors.Add(ex);
             }
 
-        throw new Exception(exs);
+        throw new AggregateException(errors);
     }
 
     /// <summary>
@@ -108,48 +78,19 @@ public static partial class GameDownload
         string contentType,
         bool allowMirror = false)
     {
-        var urls = new List<KeyValuePair<string, int>>();
-        var mcimUrl = DlSourceModGet(url);
-        if (mcimUrl is not null && mcimUrl != url)
-            switch (allowMirror ? Config.Download.Comp.CompSourceSolution : 2)
-            {
-                case 0:
-                {
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 5));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 10));
-                    urls.Add(new KeyValuePair<string, int>(url, 15));
-                    break;
-                }
-                case 1:
-                {
-                    urls.Add(new KeyValuePair<string, int>(url, 5));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 5));
-                    urls.Add(new KeyValuePair<string, int>(url, 15));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 10));
-                    break;
-                }
-
-                default:
-                {
-                    urls.Add(new KeyValuePair<string, int>(url, 5));
-                    urls.Add(new KeyValuePair<string, int>(url, 15));
-                    urls.Add(new KeyValuePair<string, int>(mcimUrl, 10));
-                    break;
-                }
-            }
-
-        var exs = "";
-        foreach (var source in urls)
+        var sourceSolution = allowMirror ? Config.Download.Comp.CompSourceSolution : 2;
+        var errors = new List<Exception>();
+        foreach (var source in _GetModRequestSources(url, sourceSolution))
             try
             {
                 var json = Requester.Fetch(
-                    source.Key,
+                    source.Url,
                     new FetchParam
                     {
                         Method = method,
                         Content = data,
                         ContentType = contentType,
-                        Timeout = source.Value * 1000
+                        Timeout = source.TimeoutSeconds * 1000
                     });
                 return typeof(T) == typeof(string)
                     ? (T)(object)json
@@ -157,10 +98,30 @@ public static partial class GameDownload
             }
             catch (Exception ex)
             {
-                if (!ex.Message.ContainsF("mcimirror")) exs += $"{ex.Message}\r\n";
+                errors.Add(ex);
             }
 
-        throw new Exception(exs);
+        throw new AggregateException(errors);
+    }
+
+    private static (string Url, int TimeoutSeconds)[] _GetModRequestSources(string url, int sourceSolution)
+    {
+        var mirrorUrl = DlSourceModGet(url);
+        if (mirrorUrl == url)
+            return [(url, 15)];
+
+        // 无 API 密钥的构建只能通过镜像查询 CurseForge。
+        if (string.IsNullOrWhiteSpace(Secrets.CurseForgeAPIKey)
+            && Uri.TryCreate(url, UriKind.Absolute, out var uri)
+            && uri.Host == "api.curseforge.com")
+            return [(mirrorUrl, 10), (mirrorUrl, 30)];
+
+        return sourceSolution switch
+        {
+            0 => [(mirrorUrl, 5), (mirrorUrl, 10), (url, 15)],
+            1 => [(url, 5), (mirrorUrl, 5), (url, 15), (mirrorUrl, 10)],
+            _ => [(url, 5), (url, 15), (mirrorUrl, 10)]
+        };
     }
 
     /// <summary>

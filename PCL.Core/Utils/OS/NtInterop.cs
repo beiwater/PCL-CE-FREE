@@ -6,6 +6,22 @@ namespace PCL.Core.Utils.OS;
 
 public static partial class NtInterop
 {
+    public static bool IsWine { get; } = _IsWine();
+
+    private static bool _IsWine()
+    {
+        if (!OperatingSystem.IsWindows() || !NativeLibrary.TryLoad("ntdll.dll", out var library))
+            return false;
+        try
+        {
+            return NativeLibrary.TryGetExport(library, "wine_get_version", out _);
+        }
+        finally
+        {
+            NativeLibrary.Free(library);
+        }
+    }
+
     [LibraryImport("ntdll.dll")]
     private static partial void RtlGetNtVersionNumbers(
         out int major,

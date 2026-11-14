@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PCL.Core.Utils.OS;
 using PCL.Core.Utils.Secret;
 using System;
 using System.IO;
@@ -31,13 +32,13 @@ public class EncryptHelperKeyTest
     }
 
     [TestMethod]
-    public void Version1KeyIsMigratedToCng()
+    public void Version1KeyIsReadAndMigratedOnNativeWindows()
     {
         var rawKey = RandomKey();
         Write(1, ProtectedData.Protect(rawKey, Entropy, DataProtectionScope.CurrentUser));
 
         CollectionAssert.AreEqual(rawKey, EncryptHelper.EncryptionKey);
-        Assert.AreEqual(2u, ReadVersion(), "v1 密钥应被就地迁移为 v2");
+        Assert.AreEqual(NtInterop.IsWine ? 1u : 2u, ReadVersion());
         Assert.AreEqual(0, BrokenFiles().Length);
 
         EncryptHelper.ResetKeyCache(); // 迁移后的文件必须能重新读回同一把密钥
@@ -56,7 +57,7 @@ public class EncryptHelperKeyTest
 
         Assert.AreEqual(32, EncryptHelper.EncryptionKey.Length);
         Assert.AreEqual(1, BrokenFiles().Length, "坏文件应被改名留存");
-        Assert.AreEqual(2u, ReadVersion(), "应生成 version 2 新密钥");
+        Assert.AreEqual(NtInterop.IsWine ? 1u : 2u, ReadVersion());
     }
 
     [TestMethod]

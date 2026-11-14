@@ -32,8 +32,8 @@
                         <local:MyComboBox x:Name="ComboDownloadSource" Grid.ColumnSpan="2" Tag="ToolDownloadSource"
                                           Grid.Column="1" SelectedIndex="{Binding FileSourceIndex, Mode=OneWay}"
                                           SelectionChanged="ComboChange">
-                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.UseMirror}" />
-                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.PreferOfficialThenMirror}" IsSelected="True" />
+                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.UseMirror}" IsSelected="True" />
+                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.PreferOfficialThenMirror}" />
                             <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.UseOfficial}" />
                         </local:MyComboBox>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{loc:Loc Setup.GameManage.Source.Version}" Margin="0,0,25,0"
@@ -42,8 +42,8 @@
                                           Grid.Column="1" Grid.Row="2"
                                           SelectedIndex="{Binding VersionListIndex, Mode=OneWay}"
                                           SelectionChanged="ComboChange">
-                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.Version.Mirror}" />
-                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.PreferOfficialThenMirror}" IsSelected="True" />
+                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.Version.Mirror}" IsSelected="True" />
+                            <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.PreferOfficialThenMirror}" />
                             <local:MyComboBoxItem Content="{loc:Loc Setup.GameManage.Source.UseOfficial}" />
                         </local:MyComboBox>
                         <TextBlock VerticalAlignment="Center" Grid.Row="4" HorizontalAlignment="Left" Text="{loc:Loc Setup.GameManage.Download.HttpProtocol}"

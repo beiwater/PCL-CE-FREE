@@ -46,19 +46,6 @@ public partial class PageSetupGameManage : IPageView
         Reload();
         SliderLoad();
 
-        if (!Lang.IsChineseMainland)
-        {
-            TextFilenameFormat.Visibility = Visibility.Collapsed;
-            ComboDownloadTranslateV2.Visibility = Visibility.Collapsed;
-            TextModManageStyle.Visibility = Visibility.Collapsed;
-            ComboModLocalNameStyle.Visibility = Visibility.Collapsed;
-
-            RowFilenameFormat.Height = new GridLength(0);
-            RowFilenameFormatGap.Height = new GridLength(0);
-            RowModManageStyle.Height = new GridLength(0);
-            RowModManageStyleGap.Height = new GridLength(0);
-        }
-
         Animations.AniEndControl();
     }
 

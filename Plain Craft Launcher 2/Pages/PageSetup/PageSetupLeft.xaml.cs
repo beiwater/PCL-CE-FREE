@@ -35,7 +35,6 @@ public partial class PageSetupLeft : IPageView
         if (ItemLauncherLanguage.Checked && hide.SetupLauncherLanguage) isHiddenPage = true;
         if (ItemLauncherMisc.Checked && hide.SetupLauncherMisc) isHiddenPage = true;
         if (ItemAbout.Checked && hide.SetupAbout) isHiddenPage = true;
-        if (ItemUpdate.Checked && hide.SetupUpdate) isHiddenPage = true;
         if (ItemFeedback.Checked && hide.SetupFeedback) isHiddenPage = true;
         if (ItemLog.Checked && hide.SetupLog) isHiddenPage = true;
         if (PageSetupUI.HiddenForceShow)
@@ -66,8 +65,6 @@ public partial class PageSetupLeft : IPageView
             ItemLauncherMisc.SetChecked(true, false, false);
         else if (!hideCfg.SetupAbout)
             ItemAbout.SetChecked(true, false, false);
-        else if (!hideCfg.SetupUpdate)
-            ItemUpdate.SetChecked(true, false, false);
         else if (!hideCfg.SetupFeedback)
             ItemFeedback.SetChecked(true, false, false);
         else if (!hideCfg.SetupLog)
@@ -164,8 +161,6 @@ public partial class PageSetupLeft : IPageView
     {
         Common.RunInNewThread(() =>
         {
-            if (!Common.CanFeedback(true))
-                return;
             switch ((DialogService.Instance.Show(new TextDialogRequest
             {
                 Title = Lang.Text("Setup.Left.Feedback.Title"),
@@ -265,12 +260,6 @@ public partial class PageSetupLeft : IPageView
                 if (Launcher.frmSetupGameManage is null)
                     Launcher.frmSetupGameManage = new PageSetupGameManage();
                 return Launcher.frmSetupGameManage;
-            }
-            case FormMain.PageSubType.SetupUpdate:
-            {
-                if (Launcher.frmSetupUpdate is null)
-                    Launcher.frmSetupUpdate = new PageSetupUpdate();
-                return Launcher.frmSetupUpdate;
             }
             case FormMain.PageSubType.SetupAbout:
             {

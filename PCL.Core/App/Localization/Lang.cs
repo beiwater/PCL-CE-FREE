@@ -31,33 +31,10 @@ namespace PCL.Core.App.Localization;
 /// </summary>
 public static class Lang
 {
-    private static readonly HashSet<string> _UnrestrictedTimeZones =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            "China Standard Time"
-        };
-
-    private static readonly HashSet<string> _UnrestrictedCultures =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            "zh-CN"
-        };
-
     /// <summary>
     ///     当前代码侧本地化格式化使用的展示区域性。
     /// </summary>
     public static CultureInfo Culture { get; private set; } = CultureInfo.CurrentCulture;
-
-    /// <summary>
-    ///     当前功能是否不受限制。
-    /// </summary>
-    public static bool IsFeaturesUnrestricted =>
-        Config.Debug.AllowRestrictedFeature
-        || (
-            _UnrestrictedTimeZones.Contains(TimeZoneInfo.Local.Id)
-            && (_UnrestrictedCultures.Contains(CultureInfo.CurrentCulture.Name)
-                || _UnrestrictedCultures.Contains(CultureInfo.CurrentUICulture.Name))
-        );
 
     /// <summary>
     ///     当前展示区域性 <see cref="Culture" /> 是否为 <c>zh-CN</c>。

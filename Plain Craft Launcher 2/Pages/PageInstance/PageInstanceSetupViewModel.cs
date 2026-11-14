@@ -237,7 +237,7 @@ public partial class PageInstanceSetupViewModel : ViewModelBase
     {
         var authVisible = type == 2 || type == 3;
         ServerAuthVisible = authVisible;
-        ServerNewProfileVisible = authVisible && ProfileUi.CanCreateOtherProfile();
+        ServerNewProfileVisible = authVisible;
         ServerAuthLockVisible = type != 0 && type != 1;
         ServerAuthEditable = !Config.InstanceAuth.AuthLocked[PageInstanceLeft.McInstance.PathInstance];
         ServerLoginLockVisible = !ServerAuthEditable;
@@ -332,9 +332,6 @@ public partial class PageInstanceSetupViewModel : ViewModelBase
     [RelayCommand]
     private void CreateServerProfile()
     {
-        if (!ProfileUi.CanCreateOtherProfile())
-            return;
-
         Launcher.frmMain.PageChange(new FormMain.PageStackData { page = FormMain.PageType.Launch });
         PageLoginAuth.draggedAuthServer = ServerAuthServerText;
         Common.RunInNewThread(() =>

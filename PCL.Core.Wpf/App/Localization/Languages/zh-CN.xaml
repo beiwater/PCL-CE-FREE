@@ -282,7 +282,6 @@
     <sys:String x:Key="Crash.Suggestion.InvalidModFileName">移除或重命名异常的模组文件，使文件名仅包含英文字母、数字、短横线、下划线和小数点。</sys:String>
     <sys:String x:Key="Crash.Suggestion.JavaIncompatible">根据 Minecraft 版本和模组要求，在启动设置中选择合适的 Java。</sys:String>
     <sys:String x:Key="Crash.Suggestion.JavaTooNew">在启动设置中改用较低版本的 Java 后再试。</sys:String>
-    <sys:String x:Key="Crash.Suggestion.LauncherOutdated">当前使用的 PCL CE 版本较旧。更新 PCL CE 可能会解决此问题：设置 → 启动器 → 检查更新。</sys:String>
     <sys:String x:Key="Crash.Suggestion.MissingMixinBootstrap">检查 MixinBootstrap、模组加载器和相关前置是否已完整安装。</sys:String>
     <sys:String x:Key="Crash.Suggestion.ModConfigCrash">尝试删除该模组的配置文件后重新启动；必要时更新或禁用该模组。</sys:String>
     <sys:String x:Key="Crash.Suggestion.ModLoaderIncompatible">打开实例设置并调整或重新安装模组加载器版本。</sys:String>
@@ -865,7 +864,6 @@
     <sys:String x:Key="Instance.Export.StartExport">开始导出</sys:String>
     <sys:String x:Key="Instance.Export.Task.CopyContent">复制导出内容</sys:String>
     <sys:String x:Key="Instance.Export.Task.CreateArchive">生成压缩包</sys:String>
-    <sys:String x:Key="Instance.Export.Task.DownloadPclRelease">下载 PCL CE 正式版</sys:String>
     <sys:String x:Key="Instance.Export.Task.FetchFileInfo">联网获取文件信息</sys:String>
     <sys:String x:Key="Instance.Export.ZipFilter">压缩文件(*.zip)|*.zip</sys:String>
 
@@ -897,7 +895,7 @@
     <sys:String x:Key="Instance.Export.Config.Comment.ExcludedFiles">排除的文件</sys:String>
     <sys:String x:Key="Instance.Export.Config.Comment.ExtraFiles">如果想将额外的文件自动放到压缩包根目录中，可以将它们的路径写在下方。</sys:String>
     <sys:String x:Key="Instance.Export.Config.Comment.ExtraFiles2">必须是完整路径。每行中，若以 \ 结尾则代表是文件夹，不以 \ 结尾则代表是文件。</sys:String>
-    <sys:String x:Key="Instance.Export.Config.Comment.IncludeLauncher">是否打包正式版 PCL CE，以便没有启动器的玩家安装整合包。</sys:String>
+    <sys:String x:Key="Instance.Export.Config.Comment.IncludeLauncher">是否打包当前 PCL CE 启动器程序，以便没有启动器的玩家安装整合包。</sys:String>
     <sys:String x:Key="Instance.Export.Config.Comment.IncludeLauncherCustom">是否打包 PCL CE 个性化内容，例如功能隐藏设置、主页、背景音乐和图片等。</sys:String>
     <sys:String x:Key="Instance.Export.Config.Comment.ModifyRules">修改下方的规则以控制需要导出的内容。</sys:String>
     <sys:String x:Key="Instance.Export.Config.Comment.Modrinth">如果你想要打包上传到 Modrinth，启用此项会生成完全符合 Modrinth 要求的整合包文件。</sys:String>
@@ -1658,7 +1656,6 @@
     <sys:String x:Key="Launch.Account.Profile.Error.Read">读取档案列表失败</sys:String>
     <sys:String x:Key="Launch.Account.Profile.Error.Write">写入档案列表失败</sys:String>
     <sys:String x:Key="Launch.Account.Profile.ImportExport">导入 / 导出</sys:String>
-    <sys:String x:Key="Launch.Account.Profile.RequireMicrosoftHint">需要先进行一次正版验证才能使用其他验证方式</sys:String>
     <sys:String x:Key="Launch.Account.Profile.Saved">档案信息已保存！</sys:String>
     <sys:String x:Key="Launch.Account.Profile.SelectHint">选择一个档案以启动游戏</sys:String>
     <sys:String x:Key="Launch.Account.Profile.Uuid.ChangeTitle">更改档案 {0} 的 UUID</sys:String>
@@ -1950,8 +1947,6 @@
     <sys:String x:Key="Main.Extra.GiveUp.ToolTip">投降</sys:String>
     <sys:String x:Key="Main.Extra.ShutdownMinecraft.ToolTip">关闭 Minecraft</sys:String>
     <sys:String x:Key="Main.Extra.TaskManager.ToolTip">任务管理</sys:String>
-    <sys:String x:Key="Main.Extra.UpdateRestart.ToolTip">重启 PCL CE 以应用软件更新</sys:String>
-    <sys:String x:Key="Main.Extra.UpdateRestart.ToolTipWithVersion">重启 PCL CE 以应用软件更新 ({0} → {1})</sys:String>
     <sys:String x:Key="Main.HiddenFeature.Disabled">功能隐藏设置已暂时关闭！</sys:String>
     <sys:String x:Key="Main.HiddenFeature.Enabled">功能隐藏设置已重新开启！</sys:String>
     <sys:String x:Key="Main.HomepageReset.Content">由于启动器更新，已重置主页预设。请重新前往 设置 - 个性化 选择预设</sys:String>
@@ -2237,23 +2232,13 @@
 
     <!-- Minecraft.Launch -->
 
-    <sys:String x:Key="Minecraft.Launch.AccountVerification.Back">返回</sys:String>
-    <sys:String x:Key="Minecraft.Launch.AccountVerification.Demo">试玩</sys:String>
-    <sys:String x:Key="Minecraft.Launch.AccountVerification.Message">你必须先登录正版账号才能启动游戏！</sys:String>
-    <sys:String x:Key="Minecraft.Launch.AccountVerification.Purchase">购买正版</sys:String>
-    <sys:String x:Key="Minecraft.Launch.AccountVerification.Title">正版验证</sys:String>
     <sys:String x:Key="Minecraft.Launch.Cancelled">已取消启动！</sys:String>
-    <sys:String x:Key="Minecraft.Launch.DemoMode">游戏将以试玩模式启动！</sys:String>
     <sys:String x:Key="Minecraft.Launch.Donate.Decline">但是我拒绝</sys:String>
     <sys:String x:Key="Minecraft.Launch.Donate.Message">PCL CE 已经为你启动了 {0} 次游戏啦！&#xA;如果 PCL CE 还算好用的话，也许可以考虑赞助一下 PCL 原作者……&#xA;如果没有大家的支持，PCL 很难在免费、无任何广告的情况下维持数年的更新（磕头）……！</sys:String>
     <sys:String x:Key="Minecraft.Launch.Donate.Support">支持一下！</sys:String>
     <sys:String x:Key="Minecraft.Launch.Donate.Title">{0} 次启动！</sys:String>
     <sys:String x:Key="Minecraft.Launch.ExportScript.Cancelled">已取消导出启动脚本！</sys:String>
     <sys:String x:Key="Minecraft.Launch.ExportScript.Success">导出启动脚本成功！</sys:String>
-    <sys:String x:Key="Minecraft.Launch.PurchaseHint.Later">下次一定</sys:String>
-    <sys:String x:Key="Minecraft.Launch.PurchaseHint.Message">看起来你似乎没买正版...&#xA;如果觉得 Minecraft 还不错，可以购买正版支持一下，毕竟开发游戏也真的很不容易...不要一直白嫖啦。&#xA;&#xA;在验证一个正版账号之后，就不会出现这个提示了！</sys:String>
-    <sys:String x:Key="Minecraft.Launch.PurchaseHint.Purchase">支持正版游戏！</sys:String>
-    <sys:String x:Key="Minecraft.Launch.PurchaseHint.Title">考虑一下正版？</sys:String>
     <sys:String x:Key="Minecraft.Launch.Success">{0} 启动成功！</sys:String>
 
     <!-- Minecraft.Launch.Error -->
@@ -2413,7 +2398,6 @@
 
     <!-- Region -->
 
-    <sys:String x:Key="Region.Feature.Restricted">Minecraft 下载、补全与整合包安装功能在你所在的国家或地区不可用。</sys:String>
     <!-- Select -->
 
     <sys:String x:Key="Select.Error.OperationFailed">实例选择操作失败。请查看错误详情。</sys:String>
@@ -2642,7 +2626,6 @@
 
     <sys:String x:Key="Setup.Feedback.ErrorPrompt.Submit.Action">反馈</sys:String>
     <sys:String x:Key="Setup.Feedback.ErrorPrompt.Submit.Message">{0}&#xA;&#xA;是否反馈此问题？如果不反馈，这个问题可能永远无法得到解决！</sys:String>
-    <sys:String x:Key="Setup.Feedback.ErrorPrompt.Update.Message">{0}&#xA;&#xA;将 PCL CE 更新至最新版或许可以解决这个问题。</sys:String>
     <sys:String x:Key="Setup.Feedback.Item.Submitter">提交者：{0}（{1}）</sys:String>
     <sys:String x:Key="Setup.Feedback.Item.Type">类型：{0}</sys:String>
     <sys:String x:Key="Setup.Feedback.Item.ViewDetail">查看详情</sys:String>
@@ -2654,11 +2637,6 @@
     <sys:String x:Key="Setup.Feedback.Submit.Description">在提交反馈之前，先查找一下是否存在重复反馈，如果有重复反馈，那么请不要再次提交反馈，这样会加剧维护者的负担……&#xA;注意：此页面未展示所有的反馈，如需查看更多反馈，请前往 GitHub。</sys:String>
     <sys:String x:Key="Setup.Feedback.Submit.Open">前往反馈</sys:String>
     <sys:String x:Key="Setup.Feedback.Submit.Title">提交反馈</sys:String>
-    <sys:String x:Key="Setup.Feedback.Unavailable.CheckFailed.Action">重新检查更新</sys:String>
-    <sys:String x:Key="Setup.Feedback.Unavailable.CheckFailed.Message">检查更新失败，因此无法提交反馈。&#xA;请连接互联网，检查更新后确认该问题在最新版中依然存在，再提交反馈。</sys:String>
-    <sys:String x:Key="Setup.Feedback.Unavailable.NotLatest.Action">更新</sys:String>
-    <sys:String x:Key="Setup.Feedback.Unavailable.NotLatest.Message">当前 PCL CE 不是最新版，因此无法提交反馈。&#xA;请更新后确认该问题在最新版中依然存在，再提交反馈。</sys:String>
-    <sys:String x:Key="Setup.Feedback.Unavailable.Title">无法提交反馈</sys:String>
     <sys:String x:Key="Setup.Feedback.Uncategorized">未分类</sys:String>
 
     <!-- Setup.Feedback.Status -->
@@ -2977,7 +2955,6 @@
     <sys:String x:Key="Setup.Left.Item.Log">查看日志</sys:String>
     <sys:String x:Key="Setup.Left.Item.Misc">杂项</sys:String>
     <sys:String x:Key="Setup.Left.Item.Ui">个性化</sys:String>
-    <sys:String x:Key="Setup.Left.Item.Update">软件更新</sys:String>
 
     <!-- Setup.Log -->
 
@@ -3037,13 +3014,6 @@
 
     <!-- Setup.Misc.System -->
 
-    <sys:String x:Key="Setup.Misc.System.Announcement">启动器公告</sys:String>
-    <sys:String x:Key="Setup.Misc.System.Announcement.All">显示所有公告</sys:String>
-    <sys:String x:Key="Setup.Misc.System.Announcement.All.ToolTip">显示包括启动器功能调查、活动等在内的全部公告</sys:String>
-    <sys:String x:Key="Setup.Misc.System.Announcement.Disabled">关闭所有公告</sys:String>
-    <sys:String x:Key="Setup.Misc.System.Announcement.Disabled.Warning.Confirm">我知道我在做什么</sys:String>
-    <sys:String x:Key="Setup.Misc.System.Announcement.Disabled.Warning.Message">若选择此项，即使在将来出现严重问题时，你也无法获取相关通知。&#xA;例如，如果发现某个版本游戏存在严重 Bug，你可能就会因为无法得到通知而导致无法预知的后果。&#xA;&#xA;一般选择 仅在有重要通知时显示公告 就可以让你尽量不受打扰了。&#xA;除非你在制作服务器整合包，或时常手动更新启动器，否则极度不推荐选择此项！</sys:String>
-    <sys:String x:Key="Setup.Misc.System.Announcement.ImportantOnly">仅在有重要通知时显示公告</sys:String>
     <sys:String x:Key="Setup.Misc.System.DisableHardwareAcceleration">禁用硬件加速</sys:String>
     <sys:String x:Key="Setup.Misc.System.ExportSettings">导出设置</sys:String>
     <sys:String x:Key="Setup.Misc.System.ExportSettings.Filter">PCL CE 配置文件(*.json)|*.json</sys:String>
@@ -3189,7 +3159,6 @@
     <sys:String x:Key="Setup.Ui.FeatureHide.Item.Toolbox">百宝箱</sys:String>
     <sys:String x:Key="Setup.Ui.FeatureHide.Item.Tools">工具</sys:String>
     <sys:String x:Key="Setup.Ui.FeatureHide.Item.Ui">个性化</sys:String>
-    <sys:String x:Key="Setup.Ui.FeatureHide.Item.Update">软件更新</sys:String>
 
     <!-- Setup.Ui.Homepage -->
 
@@ -3277,64 +3246,6 @@
     <sys:String x:Key="Setup.Ui.Theme.Light">浅色</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.LightColor">浅色配色</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Title">主题</sys:String>
-
-    <!-- Setup.Update -->
-
-    <sys:String x:Key="Setup.Update.Changelog.Empty">开发者似乎忘记提供更新摘要了...也许你可以点击下方看看完整更新日志？</sys:String>
-    <sys:String x:Key="Setup.Update.Changelog.MoreInfo">有关此更新的更多信息...</sys:String>
-    <sys:String x:Key="Setup.Update.Changelog.Placeholder">PCL CE 2.14.0 带来了让人眼前一亮的新设计和 Pigeon 智能的多项功能，同时还带来了令人愉快的跨实例工作方式，助你提高工作效率。</sys:String>
-    <sys:String x:Key="Setup.Update.Changelog.Title">关于此更新</sys:String>
-    <sys:String x:Key="Setup.Update.Changelog.Unavailable">没有可用的更新日志...</sys:String>
-    <sys:String x:Key="Setup.Update.Changelog.View">查看更新日志</sys:String>
-    <sys:String x:Key="Setup.Update.CheckAgain">再次检查</sys:String>
-    <sys:String x:Key="Setup.Update.CheckFailed">检查更新时出错</sys:String>
-    <sys:String x:Key="Setup.Update.Checking">正在检查更新...</sys:String>
-    <sys:String x:Key="Setup.Update.DotNetMissing.DownloadRuntime">下载 .NET 10 运行时</sys:String>
-    <sys:String x:Key="Setup.Update.DotNetMissing.Message">发现了启动器更新（版本 {0}），但是新版本要求你的电脑安装 .NET 10 才可以运行。&#xA;你需要先安装 .NET 10 才可以继续更新。&#xA;&#xA;点击下方按钮打开网页，然后选择 ⌈.NET 桌面运行时⌋ 中的 {1} 选项下载。</sys:String>
-    <sys:String x:Key="Setup.Update.DotNetMissing.Title">启动器更新 - 缺少运行环境</sys:String>
-    <sys:String x:Key="Setup.Update.Error.NetworkFailed">无法获取最新版本信息，请检查网络连接</sys:String>
-    <sys:String x:Key="Setup.Update.Install">下载并安装</sys:String>
-    <sys:String x:Key="Setup.Update.Latest">已是最新版本</sys:String>
-    <sys:String x:Key="Setup.Update.MirrorChyanCdk.Get">获取 CDK</sys:String>
-    <sys:String x:Key="Setup.Update.MirrorChyanCdk.Label">Mirror 酱 CDK</sys:String>
-    <sys:String x:Key="Setup.Update.MirrorChyanCdk.ToolTip">Mirror 酱 (mirrorchyan.com) 是一个付费的第三方应用分发平台，用于提供国内有偿高速下载源。&#xA;这是一项可选服务，不填入 CDK 不影响正常使用与更新。&#xA;如果你有 Mirror 酱的 CDK，可以提供给 PCL CE，启动器会优先使用他们的高速下载源下载软件更新，也能缓解社区公益更新服务器的一些压力……</sys:String>
-    <sys:String x:Key="Setup.Update.OtherOptions.Placeholder">AquaCL 3 是 PCL CE 的第一个主要更新，带来了让人眼前一亮的新设计，使用了最新开发技术，完全重构了基础体验，并更支持 macOS、Linux 等其他平台。</sys:String>
-    <sys:String x:Key="Setup.Update.OtherOptions.Title">其他更新选项 - 升级到 AquaCL</sys:String>
-    <sys:String x:Key="Setup.Update.RestartInstall">重启安装</sys:String>
-
-    <!-- Setup.Update.Auto -->
-
-    <sys:String x:Key="Setup.Update.Auto.Disabled">不自动检查更新（不推荐）</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.Disabled.ToolTip">关闭自动更新检查。这可能导致你无法及时获得更新。</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.DownloadAndInstall">自动下载并安装更新</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.DownloadAndInstall.ToolTip">启动器将会自动检查并下载可用更新，并在关闭启动器后自动安装更新。</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.DownloadAndNotify">自动下载并提示更新</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.DownloadAndNotify.ToolTip">启动器将会自动检查并下载可用更新，并在完成后提示你安装更新。</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.NotifyOnly">提示更新</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.NotifyOnly.ToolTip">启动器将会自动检查可用更新，然后提示你下载并安装更新。</sys:String>
-    <sys:String x:Key="Setup.Update.Auto.Title">自动更新设置</sys:String>
-
-    <!-- Setup.Update.Channel -->
-
-    <sys:String x:Key="Setup.Update.Channel.Beta">测试版 / Beta</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Beta.ToolTip">可能不稳定的测试版本，将会进行功能的早期测试，适合希望帮助测试且有一定技术能力的用户使用。</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Beta.Warning.Message">你正在切换启动器更新通道到测试版。&#xA;测试版可以提供下个版本更新内容的预览，但可能会包含未经充分测试的功能，稳定性欠佳。&#xA;&#xA;在升级到测试版后，你需要等待下一个正式版发布，或是手动重新下载启动器来切换到正式版。&#xA;该选项仅推荐具有一定基础知识和能力的用户选择。如果你正在制作整合包，请使用正式版！</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Common.Warning.Confirm">我已知晓</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Common.Warning.Title">继续之前...</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Release">正式版 / Release</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Release.ToolTip">较为稳定的版本，仅推送修复性更新与部分内置资源更新，适合大多数用户使用。</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Title">更新通道</sys:String>
-
-    <!-- Setup.Update.Channel.Dev -->
-
-    <sys:String x:Key="Setup.Update.Channel.Dev">开发版 / Dev</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.FinalConfirm.ExpectedInput">我确认切换到此分支并已知晓风险</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.FinalConfirm.Message">你确定要切换到开发版通道吗？&#xA;开发版可能存在严重问题，甚至无法启动！&#xA;&#xA;在升级到开发版后，将无法切换回其他任何更新通道，只能手动重新下载启动器来切换回正式版或测试版。&#xA;&#xA;该选项仅推荐高级用户选择。如果你正在制作整合包，请使用正式版！&#xA;请输入 '{0}' 以确认。</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.FinalConfirm.Submit">提交</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.FinalConfirm.Title">最终确认</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.FinalConfirm.WrongInput">你输入了错误的内容...</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.ToolTip">可能极不稳定的开发版本，直接从最新源代码构建，适合高度技术性用户。&#xA;可能需要具备较好的互联网连接质量才能顺利获取此通道更新。</sys:String>
-    <sys:String x:Key="Setup.Update.Channel.Dev.Warning.Message">你正在切换启动器更新通道到开发版。&#xA;该通道可第一时间获取基于最新代码构建的开发版本，但可能极不稳定，甚至直接无法启动。&#xA;&#xA;在升级到开发版后，只能手动重新下载启动器来切换回正式版或测试版。&#xA;该选项仅推荐高级用户选择。如果你正在制作整合包，请使用正式版！</sys:String>
 
     <!-- Speed -->
 
@@ -3622,41 +3533,6 @@
     <sys:String x:Key="Tools.Test.Skin.Saved">玩家 {0} 的皮肤已保存！</sys:String>
     <sys:String x:Key="Tools.Test.Skin.Title">下载正版玩家的皮肤</sys:String>
     <sys:String x:Key="Tools.Test.Skin.TooFrequent">获取皮肤太过频繁，请 5 分钟之后再试！</sys:String>
-
-    <!-- Update -->
-
-    <sys:String x:Key="Update.Action">更新</sys:String>
-    <sys:String x:Key="Update.Available">启动器有新版本可用（{0} -&gt; {1}）&#xA;是否立即更新？</sys:String>
-    <sys:String x:Key="Update.Check.Failed">无法获取最新版本信息，请检查网络连接</sys:String>
-    <sys:String x:Key="Update.CommunityNotice.Body">你正在使用来自 PCL-Community 的 PCL CE，遇到问题请不要向原版仓库反馈！&#xA;PCL-Community 及其成员与龙腾猫跃无从属关系，且均不会为您的使用做担保。&#xA;&#xA;如果你是意外下载的 PCL CE，建议下载原版 PCL 使用。&#xA;如果你是意外下载的 PCL CE，建议下载原版 PCL 使用。&#xA;如果你是意外下载的 PCL CE，建议下载原版 PCL 使用。&#xA;&#xA;该版本与原版的特性区别：&#xA;- 主题切换：仅部分固定蓝色系主题，没有计划新增其它主题。&#xA;- 百宝箱：缺失部分原版中的内容（回声洞、千万别点）。&#xA;&#xA;此提示会在启动器更新后展示一次。</sys:String>
-    <sys:String x:Key="Update.CommunityNotice.Confirm">我知道了</sys:String>
-    <sys:String x:Key="Update.CommunityNotice.Title">PCL CE 版本说明</sys:String>
-    <sys:String x:Key="Update.Error.FetchFailed">获取启动器更新失败，请检查网络连接</sys:String>
-    <sys:String x:Key="Update.Error.FileNotFound">找不到更新文件</sys:String>
-    <sys:String x:Key="Update.Error.OperationFailed">更新操作失败。请查看错误详情。</sys:String>
-    <sys:String x:Key="Update.Error.Sha256Mismatch">更新文件 SHA256 不正确，应该为 {0}，实际为 {1}</sys:String>
-    <sys:String x:Key="Update.Error.UnableToGetUpdate">无法获取更新</sys:String>
-    <sys:String x:Key="Update.Error.UpdateBlocked">更新失败</sys:String>
-    <sys:String x:Key="Update.Error.UpdateBlockedMessage">由于被 Windows 安全中心拦截，或者存在权限问题，导致 PCL CE 无法更新。&#xA;请将 PCL CE 所在文件夹加入白名单，或者手动用 {0}PCL\Plain Craft Launcher Community Edition.exe 替换当前文件！</sys:String>
-    <sys:String x:Key="Update.Service.PclCe">PCL CE 服务</sys:String>
-    <sys:String x:Key="Update.Title">启动器更新</sys:String>
-
-    <!-- Update.Task -->
-
-    <sys:String x:Key="Update.Task.ApplyFile">应用文件</sys:String>
-    <sys:String x:Key="Update.Task.Check">校验更新</sys:String>
-    <sys:String x:Key="Update.Task.DownloadFile">下载文件</sys:String>
-    <sys:String x:Key="Update.Task.DownloadLatestStable">下载最新稳定版</sys:String>
-    <sys:String x:Key="Update.Task.DownloadUpdateFile">下载更新文件</sys:String>
-    <sys:String x:Key="Update.Task.GetAnnouncementFailed">获取公告信息失败</sys:String>
-    <sys:String x:Key="Update.Task.GetDownloadInfo">获取下载信息</sys:String>
-    <sys:String x:Key="Update.Task.GetVersionInfo">获取版本信息</sys:String>
-    <sys:String x:Key="Update.Task.GetVersionInfoFailed">获取版本信息失败</sys:String>
-    <sys:String x:Key="Update.Task.Install">安装更新</sys:String>
-    <sys:String x:Key="Update.Task.Prepare">准备更新</sys:String>
-    <sys:String x:Key="Update.Task.RefreshSettings">刷新设置 UI</sys:String>
-    <sys:String x:Key="Update.Task.RestartInstall">重启安装</sys:String>
-    <sys:String x:Key="Update.Task.ShowButton">显示按钮</sys:String>
 
     <!-- Watcher -->
 

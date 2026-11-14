@@ -44,7 +44,6 @@ public static partial class Launcher
     public static PageSetupLaunch? frmSetupLaunch;
     public static PageSetupUI? frmSetupUi;
     public static PageSetupGameManage? frmSetupGameManage;
-    public static PageSetupUpdate? frmSetupUpdate;
     public static PageSetupJava? frmSetupJava;
     public static PageSetupAbout? frmSetupAbout;
     public static PageSetupLog? frmSetupLog;

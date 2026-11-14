@@ -24,8 +24,8 @@ body = """
 
 ---
 
-[如果你有 Mirror 酱 CDK 可以直接使用此高速下载源](https://mirrorchyan.com/zh/projects?rid=PCL2-CE&source=pcl2ce-gh-release)
-你也可以直接在下方的 Assets 中下载
+自用构建，非上游官方发布。已移除 OTA、离线登录正版前置要求及地区功能限制。
+请从本仓库 Actions 的 Artifacts 或此发布的 Assets 下载，手动替换更新。
 
 """
 # Remove leading and trailing whitespaces from the changelog's body.

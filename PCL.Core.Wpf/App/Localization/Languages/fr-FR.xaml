@@ -235,7 +235,6 @@
     <sys:String x:Key="Crash.Suggestion.InvalidModFileName">Supprimez ou renommez le fichier de mod concerné afin que son nom ne contienne que des lettres anglaises, des chiffres, des traits d'union, des traits de soulignement et des points.</sys:String>
     <sys:String x:Key="Crash.Suggestion.JavaIncompatible">Choisissez une version Java adaptée dans les paramètres de lancement selon la version de Minecraft et les exigences des mods.</sys:String>
     <sys:String x:Key="Crash.Suggestion.JavaTooNew">Dans les paramètres de lancement, passez à une version plus ancienne de Java, puis réessayez.</sys:String>
-    <sys:String x:Key="Crash.Suggestion.LauncherOutdated">Vous utilisez une version obsolète de PCL CE. La mise à jour de PCL CE peut résoudre ce problème: Paramètres → Lanceur → Vérifier les mises à jour.</sys:String>
     <sys:String x:Key="Crash.Suggestion.MissingMixinBootstrap">Vérifiez que MixinBootstrap, le chargeur de mods et les dépendances associées sont correctement installés.</sys:String>
     <sys:String x:Key="Crash.Suggestion.ModConfigCrash">Essayez de supprimer le fichier de configuration de ce mod, puis relancez le jeu. Si nécessaire, mettez à jour ou désactivez le mod.</sys:String>
     <sys:String x:Key="Crash.Suggestion.ModLoaderIncompatible">Ouvrez les paramètres de l'instance et ajustez ou réinstallez la version du chargeur de mods.</sys:String>

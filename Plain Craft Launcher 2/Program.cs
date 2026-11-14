@@ -47,8 +47,6 @@ internal static class Program
         LoadingUi.Current = new LoadingUiBridge();
         LauncherUi.Interaction = new WpfUserInteraction();
         DownloadUserInteraction.Current = new WpfDownloadInteraction();
-        UpdateUi.Current = new WpfUpdateUi();
-        AnnouncementActions.Current = new WpfAnnouncementActions();
         WatcherUi.Current = new WpfWatcherUi();
         MediaService.Current = new WpfMediaService();
         CrashAnalysisService.Current = new WpfCrashAnalysisService();
@@ -59,7 +57,6 @@ internal static class Program
         LaunchUi.Current = new WpfLaunchUi();
         LoginProfile.Current = new WpfProfileUi();
         LogFilter.Current = new WpfLogFilter();
-        RestrictedFeatures.Current = new WpfRestrictedFeatures();
         ModpackUi.Current = new WpfModpackUi();
         EventUi.Current = new WpfEventUi();
         LauncherState.InstanceSelectionChanged += _ => PageDownloadCompDetail.cachedFolder.Clear();

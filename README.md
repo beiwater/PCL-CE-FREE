@@ -1,5 +1,9 @@
 **简体中文** | [English](README-EN.md) | [繁體中文](README-ZH_TW.md)
 
+> **自用构建（beiwater/PCL-CE-FREE）**：已移除启动器 OTA 升级、离线／第三方登录的正版账号前置要求及地区功能限制。保留正常账号验证；服务器自身的验证和地区政策不受此修改影响。
+>
+> 构建包见本仓库 [GitHub Actions](https://github.com/beiwater/PCL-CE-FREE/actions/workflows/build-test.yml) 的 Artifacts。仅供自用，与上游官方发布无关；更新需手动替换。
+
 <div align="center">
 
 <img src="Plain Craft Launcher 2/Images/icon.ico" alt="Logo" width="80" height="80">

@@ -227,22 +227,12 @@ public static class ProfileUi
         return uuid;
     }
 
-    public static bool CanCreateOtherProfile()
-    {
-#if DEBUG || DEBUGCI
-        return true;
-#else
-        return ProfileService.HasMicrosoftProfile || (Lang.IsFeaturesUnrestricted && ProfileService.Profiles.Count > 0) || NetworkHelper.IsNetworkAvailable() is false;
-#endif
-    }
-
     public static async Task CreateProfileAsync()
     {
-        var includeOthers = Common.RunInUiWait(CanCreateOtherProfile);
         var selectedDialog = await DialogService.Instance.ShowAsync(new SelectDialogRequest
         {
             Title = Lang.Text("Launch.Account.Profile.Create.SelectAuthType.Title"),
-            Options = PCL.DialogOptions.From(_GetAvailableProfileSelection(includeOthers)),
+            Options = PCL.DialogOptions.From(_GetAvailableProfileSelection()),
             Buttons = DialogButtons.From(
                 DialogButton.Create(Lang.Text("Common.Action.Continue")),
                 DialogButton.Create(Lang.Text("Common.Action.Cancel"))),
@@ -282,13 +272,12 @@ public static class ProfileUi
         Common.RunInUi(() => Launcher.frmLaunchLeft.RefreshPage(true, type));
     }
 
-    private static List<IMyRadio> _GetAvailableProfileSelection(bool includeOthers) => includeOthers
-        ? [
+    private static List<IMyRadio> _GetAvailableProfileSelection() =>
+        [
             new MyListItem { Title = Lang.Text("Launch.Account.Type.Microsoft"), Type = MyListItem.CheckType.RadioBox, SvgIcon = "lucide/shield-check" },
             new MyListItem { Title = Lang.Text("Launch.Account.Type.ThirdParty"), Type = MyListItem.CheckType.RadioBox, SvgIcon = "lucide/network" },
             new MyListItem { Title = Lang.Text("Launch.Account.Type.Offline"), Type = MyListItem.CheckType.RadioBox, SvgIcon = "lucide/link-2-off" }
-        ]
-        : [new MyListItem { Title = Lang.Text("Launch.Account.Type.Microsoft"), Type = MyListItem.CheckType.RadioBox, SvgIcon = "lucide/shield-check" }];
+        ];
 
     public static void EditProfileId() => _ = EditProfileIdAsync();
 

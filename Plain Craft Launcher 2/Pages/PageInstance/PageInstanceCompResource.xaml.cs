@@ -2553,9 +2553,9 @@ public partial class PageInstanceCompResource : IRefreshable, IPageView, ILocalM
 
                     modSearchName = modSearchName.Replace("++", "+").Replace("pti+Fine", "ptiFine");
                     // 显示
-                    if (_vm.CompType == Comp.CompType.Schematic || !Lang.IsChineseMainland)
+                    if (_vm.CompType == Comp.CompType.Schematic)
                     {
-                        // 投影原理图文件或非中文区域不显示百科搜索选项
+                        // 投影原理图文件不显示百科搜索选项
                         if (modEntry.Url is null)
                             await DialogService.Instance.ShowAsync(new TextDialogRequest
                             {

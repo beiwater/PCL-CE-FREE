@@ -118,15 +118,6 @@ public partial class PageSetupLauncherMisc : IPageView
         Reload();
     }
 
-    // 将控件改变路由到设置改变
-    private void ComboChange(object senderRaw, SelectionChangedEventArgs e)
-    {
-        var sender = (MyComboBox)senderRaw;
-        if (Animations.AniExitsAnyControl() || sender.SelectedIndex < 0)
-            return;
-        SetByTag(sender.Tag?.ToString(), sender.SelectedIndex);
-    }
-
     private void RadioBoxChange(object senderRaw, Common.RouteEventArgs e)
     {
         var sender = (MyRadioBox)senderRaw;
@@ -197,26 +188,6 @@ public partial class PageSetupLauncherMisc : IPageView
             HintService.Show(Hints.Info(Lang.Text("Setup.Misc.Debug.Mode.Hint"), log: false));
     }
 
-    // 自动更新
-    private void ComboSystemActivity_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (Animations.AniExitsAnyControl() || sender is not MyComboBox combo || (!combo.IsDropDownOpen && !Keyboard.IsKeyDown(Key.Enter)))
-            return;
-        if (ComboSystemActivity.SelectedIndex != 2)
-            return;
-        if (_vm.Dialog.Show(new TextDialogRequest
-        {
-            Title = Lang.Text("Common.Dialog.Warning"),
-            Content = Lang.Text("Setup.Misc.System.Announcement.Disabled.Warning.Message"),
-            Buttons = DialogButtons.From(
-                DialogButton.Create(Lang.Text("Setup.Misc.System.Announcement.Disabled.Warning.Confirm")),
-                DialogButton.Create(Lang.Text("Common.Action.Cancel"))),
-            IsWarn = true,
-            ForceWait = true
-        }).Result?.Button ==
-            2) ComboSystemActivity.SelectedItem = e.RemovedItems[0];
-    }
-
     private void CheckDebugMode_OnChange(object sender, bool user)
     {
         CheckBoxChange(sender, user);
@@ -227,12 +198,6 @@ public partial class PageSetupLauncherMisc : IPageView
     {
         CheckBoxChange(sender, user);
         Check_DisableHardwareAcceleration(sender, user);
-    }
-
-    private void ComboSystemActivity_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        ComboChange(sender, e);
-        ComboSystemActivity_SelectionChanged(sender, e);
     }
 
     #region 导出 / 导入设置

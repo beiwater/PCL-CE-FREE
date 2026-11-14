@@ -489,13 +489,6 @@
                             VerticalAlignment="Bottom"
                             Grid.Row="1"
                             Margin="15">
-                    <local:MyExtraButton x:Name="BtnExtraUpdateRestart"
-                                         HorizontalAlignment="Right"
-                                         Click="BtnExtraUpdateRestart_Click"
-                                         VerticalAlignment="Center"
-                                         ToolTip="{loc:Loc Main.Extra.UpdateRestart.ToolTip}"
-                                         Visibility="Collapsed"
-                                         SvgIcon="lucide/refresh-cw" />
                     <local:MyExtraButton x:Name="BtnExtraBack"
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Center"

@@ -76,12 +76,10 @@ public partial class PageDownloadCompDetailViewModel : ViewModelBase
     public void ApplyProjectState(Comp.CompProject project)
     {
         IntroWebText = project.FromCurseForge ? "CurseForge" : "Modrinth";
-        IntroWikiVisibility = Lang.IsChineseMainland && project.WikiId != 0
+        IntroWikiVisibility = project.WikiId != 0
             ? Visibility.Visible
             : Visibility.Collapsed;
-        TranslateVisibility = Lang.IsChineseMainland
-            ? Visibility.Visible
-            : Visibility.Collapsed;
+        TranslateVisibility = Visibility.Visible;
     }
 
     public void SetFilterVisibility(bool visible)

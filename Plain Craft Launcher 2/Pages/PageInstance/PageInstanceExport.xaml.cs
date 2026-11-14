@@ -900,25 +900,6 @@ public partial class PageInstanceExport : IRefreshable, IPageView
         // 构造步骤加载器
         var loaders = new List<Loading.LoaderBase>();
 
-        #region 准备 PCL 文件
-
-#if !RELEASE
-        if (includePcl)
-            loaders.Add(new Loading.LoaderTask<int, int>(Lang.Text("Instance.Export.Task.DownloadPclRelease"),
-                loader =>
-                {
-                    UpdateManager.DownloadLatestPcl(loader);
-                    Common.CopyFile(Path.Combine(Common.pathTemp, "CE-Latest.exe"),
-                        Path.Combine(cacheFolder, "Plain Craft Launcher.exe"));
-                })
-            {
-                ProgressWeight = 0.5d,
-                block = false
-            });
-#endif
-
-        #endregion
-
         #region 复制文件
 
         loaders.Add(new Loading.LoaderTask<int, List<LocalComp.LocalCompFile>>(
@@ -1000,10 +981,8 @@ public partial class PageInstanceExport : IRefreshable, IPageView
                 loader.Progress = 0.97d;
                 // 复制 PCL 实例设置
                 Common.CopyDirectory(Path.Combine(mcInstance.PathInstance, "PCL"), Path.Combine(overridesFolder, "PCL"));
-#if RELEASE
                 // 复制 PCL 本体
-                if (includePcl) Common.CopyFile(Basics.ExecutablePath, Path.Combine(cacheFolder, Basics.ExecutableName));
-#endif
+                if (includePcl) Common.CopyFile(Basics.ExecutablePath, Path.Combine(cacheFolder, "Plain Craft Launcher.exe"));
                 // 复制 PCL 个性化内容
                 if (includePclCustom)
                 {

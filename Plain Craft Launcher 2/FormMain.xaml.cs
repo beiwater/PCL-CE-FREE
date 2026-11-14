@@ -162,7 +162,6 @@ public partial class FormMain
         PageSetupUI.BackgroundRefresh(false, true);
         Music.MusicRefreshPlay(false, true);
         // 扩展按钮
-        BtnExtraUpdateRestart.showCheck = BtnExtraUpdateRestart_ShowCheck;
         BtnExtraDownload.showCheck = BtnExtraDownload_ShowCheck;
         BtnExtraBack.showCheck = BtnExtraBack_ShowCheck;
         BtnExtraApril.showCheck = BtnExtraApril_ShowCheck;
@@ -302,7 +301,6 @@ public partial class FormMain
                 {
                     GameDownload.dlClientListMojangLoader.Start(1); // PCL 会同时根据这里的加载结果决定是否使用官方源进行下载
                     RunCountSub();
-                    UpdateManager.serverLoader.Start(1);
                     Common.RunInNewThread(Launcher.TryClearTaskTemp, "TryClearTaskTemp", ThreadPriority.BelowNormal);
                 }
                 catch (Exception ex)
@@ -361,8 +359,6 @@ public partial class FormMain
         if ((int)Config.Launch.GameWindowMode == 5)
             Config.Launch.GameWindowMode = GameWindowSizeMode.Default;
 
-        // 更新后展示社区版提示
-        UpdateManager.ShowCeAnnounce();
         // 输出更新日志
         if (lastVersionCode <= 0)
             return;
@@ -528,8 +524,7 @@ public partial class FormMain
     ///     正常关闭程序。程序将在执行此方法后约 0.3s 退出。
     /// </summary>
     /// <param name="sendWarning">是否在还有下载任务未完成时发出警告。</param>
-    /// <param name="isUpdating">是否正在更新重启</param>
-    public void EndProgram(bool sendWarning, bool isUpdating = false)
+    public void EndProgram(bool sendWarning)
     {
         // 发出警告
         if (sendWarning && NetFacade.HasDownloadingTask())
@@ -592,12 +587,12 @@ public partial class FormMain
                         Visibility = Visibility.Collapsed;
                         ShowInTaskbar = false;
                     }, 210),
-                    Animations.AaCode(() => EndProgramForce(force: false, isUpdating: isUpdating), 230)
+                    Animations.AaCode(() => EndProgramForce(force: false), 230)
                 }, "Form Close");
             }
             else
             {
-                EndProgramForce(force: false, isUpdating: isUpdating);
+                EndProgramForce(force: false);
             }
 
             Common.Log("[System] 收到关闭指令");
@@ -607,15 +602,13 @@ public partial class FormMain
     private static bool isLogShown;
 
     public static void EndProgramForce(Common.ProcessReturnValues returnCode = Common.ProcessReturnValues.Success,
-        bool force = true, bool isUpdating = false)
+        bool force = true)
     {
         // On Error Resume Next
         // 关闭联机大厅
         // Await LobbyController.CloseAsync().ConfigureAwait(False)
         Common.isProgramEnded = true;
         Animations.AniBeginControl();
-        if (UpdateManager.isUpdateWaitingRestart && !isUpdating)
-            UpdateManager.UpdateRestart(false, false);
         if (returnCode == Common.ProcessReturnValues.Exception)
         {
             if (!isLogShown)
@@ -1493,7 +1486,6 @@ public partial class FormMain
         SetupLog = 5,
         SetupFeedback = 6,
         SetupGameLink = 7,
-        SetupUpdate = 8,
         SetupJava = 9,
         SetupLauncherMisc = 10,
         SetupLauncherLanguage = 11,
@@ -2206,17 +2198,6 @@ public partial class FormMain
     #endregion
 
     #region 附加按钮
-
-    // 更新重启
-    private void BtnExtraUpdateRestart_Click(object sender, MouseButtonEventArgs e)
-    {
-        UpdateManager.UpdateRestart(true);
-    }
-
-    private bool BtnExtraUpdateRestart_ShowCheck()
-    {
-        return UpdateManager.isUpdateWaitingRestart;
-    }
 
     // 音乐
     private void BtnExtraMusic_Click(object sender, MouseButtonEventArgs e)

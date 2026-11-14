@@ -119,11 +119,6 @@ public static partial class States
         [ConfigItem<bool>("UiSchematicFirstTimeHintShown", false)] public partial bool SchematicFirstTime { get; set; }
 
         /// <summary>
-        /// 已显示的公告。
-        /// </summary>
-        [ConfigItem<string>("SystemSystemAnnouncement", "")] public partial string ShowedAnnouncements { get; set; }
-
-        /// <summary>
         /// 数据包更新警告。
         /// </summary>
         [ConfigItem<bool>("HintDatapackUpdate",false)] public partial bool FunctionDatapackUpdate { get; set; }
@@ -253,11 +248,6 @@ public static partial class States
         /// 本地配置版本。
         /// </summary>
         [ConfigItem<int>("SystemSetupVersionIni", 1, ConfigSource.Local)] public partial int SetupVersionLocal { get; set; }
-
-        /// <summary>
-        /// 启动器公告。
-        /// </summary>
-        [ConfigItem<int>("SystemSystemActivity", 0, ConfigSource.Local)] public partial int AnnounceSolution { get; set; }
 
     }
 

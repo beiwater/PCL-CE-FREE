@@ -19,8 +19,6 @@ public partial class PageLoginProfileViewModel : ViewModelBase
 
     [ObservableProperty] private bool _showCreateHint;
 
-    [ObservableProperty] private bool _showMicrosoftHint;
-
     [RelayCommand]
     public async Task ReloadAsync()
     {
@@ -45,7 +43,6 @@ public partial class PageLoginProfileViewModel : ViewModelBase
         }
 
         var isEmpty = profiles.Count == 0;
-        ShowMicrosoftHint = isEmpty;
         ShowCreateHint = isEmpty;
         if (isEmpty) States.Hint.LaunchWithProfile = true;
     }

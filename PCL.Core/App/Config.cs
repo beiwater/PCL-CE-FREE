@@ -62,7 +62,6 @@ public static partial class Config
         [ConfigItem<int>("SystemDebugAnim", 9)] public partial int AnimationSpeed { get; set; }
         [ConfigItem<bool>("SystemDebugDelay", false)] public partial bool AddRandomDelay { get; set; }
         [ConfigItem<bool>("SystemDebugSkipCopy", false)] public partial bool DontCopy { get; set; }
-        [ConfigItem<bool>("SystemDebugAllowRestrictedFeature", false)] public partial bool AllowRestrictedFeature { get; set; }
     }
 
     /// <summary>
@@ -105,27 +104,6 @@ public static partial class Config
         // [ConfigItem<int>("ToolUpdateAlpha", 0, ConfigSource.SharedEncrypt)] public partial int Alpha { get; set; }
         [ConfigItem<bool>("ToolUpdateRelease", false)] public partial bool ReleaseNotification { get; set; }
         [ConfigItem<bool>("ToolUpdateSnapshot", false)] public partial bool SnapshotNotification { get; set; }
-    }
-
-    /// <summary>
-    /// 更新配置。
-    /// </summary>
-    [ConfigGroup("Update")] partial class UpdateConfigGroup
-    {
-        /// <summary>
-        /// 自动更新行为。
-        /// </summary>
-        [ConfigItem<LauncherAutoUpdateBehavior>("SystemSystemUpdate", LauncherAutoUpdateBehavior.DownloadAndAnnounce, ConfigSource.Local)] public partial LauncherAutoUpdateBehavior UpdateMode { get; set; }
-
-        /// <summary>
-        /// 更新分支。
-        /// </summary>
-        [ConfigItem<UpdateChannel>("SystemUpdateChannel", UpdateChannel.Release, ConfigSource.Local)] public partial UpdateChannel UpdateChannel { get; set; }
-            
-        /// <summary>
-        /// Mirror 酱 CDK。
-        /// </summary>
-        [ConfigItem<string>("SystemMirrorChyanKey", "", ConfigSource.SharedEncrypt)] public partial string MirrorChyanKey { get; set; }
     }
 
     /// <summary>
@@ -438,7 +416,6 @@ public static partial class Config
             [ConfigItem<bool>("UiHiddenSetupLauncherMisc", false, ConfigSource.Local)] public partial bool SetupLauncherMisc { get; set; }
             [ConfigItem<bool>("UiHiddenSetupGameManage", false, ConfigSource.Local)] public partial bool SetupGameManage { get; set; }
             [ConfigItem<bool>("UiHiddenSetupJava", false, ConfigSource.Local)] public partial bool SetupJava { get; set; }
-            [ConfigItem<bool>("UiHiddenSetupUpdate", false, ConfigSource.Local)] public partial bool SetupUpdate { get; set; }
             [ConfigItem<bool>("UiHiddenSetupGameLink", false, ConfigSource.Local)] public partial bool SetupGameLink { get; set; } // 新增
             [ConfigItem<bool>("UiHiddenSetupAbout", false, ConfigSource.Local)] public partial bool SetupAbout { get; set; } // 修正名称
             [ConfigItem<bool>("UiHiddenSetupFeedback", false, ConfigSource.Local)] public partial bool SetupFeedback { get; set; } // 修正名称

@@ -262,27 +262,6 @@ public static partial class Common
             _isCriticalErrorTriggered = true;
         }
 
-        if (!CanFeedback(false))
-        {
-            var message = Lang.Text(
-                "Setup.Feedback.ErrorPrompt.Update.Message",
-                userMessage);
-
-            if (isCritical)
-                Interaction.MsgBox(message, MsgBoxStyle.Critical, title);
-            else
-                DialogService.Instance.Show(new TextDialogRequest
-                {
-                    Title = title,
-                    Content = message,
-                    Buttons = DialogButtons.Ok,
-                    IsWarn = true,
-                    ForceWait = true
-                });
-
-            return;
-        }
-
         var feedbackMessage = Lang.Text(
             "Setup.Feedback.ErrorPrompt.Submit.Message",
             userMessage);
@@ -362,48 +341,6 @@ public static partial class Common
         if (shouldOpenLogFolder)
             OpenExplorer(ExePath + @"PCL\Log\");
         OpenWebsite("https://github.com/PCL-Community/PCL2-CE/issues/");
-    }
-
-    /// <summary>
-    ///     检查当前版本是否支持提交反馈。
-    /// </summary>
-    public static bool CanFeedback(bool showHint)
-    {
-        var status = UpdateManager.GetVersionStatus();
-
-        if (status == UpdateEnums.VersionStatus.Latest)
-            return true;
-        if (!showHint)
-            return false;
-
-        var (messageKey, actionKey) = status switch
-        {
-            UpdateEnums.VersionStatus.NotLatest => (
-                "Setup.Feedback.Unavailable.NotLatest.Message",
-                "Setup.Feedback.Unavailable.NotLatest.Action"),
-
-            _ => (
-                "Setup.Feedback.Unavailable.CheckFailed.Message",
-                "Setup.Feedback.Unavailable.CheckFailed.Action")
-        };
-
-        var shouldOpenUpdatePage = DialogService.Instance.Show(new TextDialogRequest
-            {
-                Title = Lang.Text("Setup.Feedback.Unavailable.Title"),
-                Content = Lang.Text(messageKey),
-                Buttons = DialogButtons.From(
-                    DialogButton.Create(Lang.Text(actionKey)),
-                    DialogButton.Create(Lang.Text("Common.Action.Cancel"))),
-                ForceWait = true
-            }).Result
-            ?.Button == 1;
-
-        if (shouldOpenUpdatePage)
-            Launcher.frmMain?.PageChange(
-                FormMain.PageType.Setup,
-                FormMain.PageSubType.SetupUpdate);
-
-        return false;
     }
 
     /// <summary>

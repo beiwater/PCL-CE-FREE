@@ -152,7 +152,6 @@ public partial class PageSetupUI : IPageView
             CheckHiddenSetupGameManage.Checked = uiHidden.SetupGameManage;
             CheckHiddenSetupJava.Checked = uiHidden.SetupJava;
             CheckHiddenLauncherMisc.Checked = uiHidden.SetupLauncherMisc;
-            CheckHiddenSetupUpdate.Checked = uiHidden.SetupUpdate;
             CheckHiddenSetupGameLink.Checked = uiHidden.SetupGameLink;
             CheckHiddenSetupAbout.Checked = uiHidden.SetupAbout;
             CheckHiddenSetupFeedback.Checked = uiHidden.SetupFeedback;
@@ -801,8 +800,6 @@ public partial class PageSetupUI : IPageView
                     : Visibility.Visible;
                 Launcher.frmSetupLeft.ItemJava.Visibility =
                     !HiddenForceShow && conf.SetupJava ? Visibility.Collapsed : Visibility.Visible;
-                Launcher.frmSetupLeft.ItemUpdate.Visibility =
-                    !HiddenForceShow && conf.SetupUpdate ? Visibility.Collapsed : Visibility.Visible;
                 Launcher.frmSetupLeft.ItemGameLink.Visibility = !HiddenForceShow && conf.SetupGameLink
                     ? Visibility.Collapsed
                     : Visibility.Visible;
@@ -821,7 +818,7 @@ public partial class PageSetupUI : IPageView
                     (Launcher.frmSetupLeft.TextToolsCategory, !conf.SetupGameLink),
                     (Launcher.frmSetupLeft.TextLauncherCategory, !(conf.SetupUi && conf.SetupLauncherLanguage && conf.SetupLauncherMisc)),
                     (Launcher.frmSetupLeft.TextAboutCategory,
-                        !(conf.SetupAbout && conf.SetupUpdate && conf.SetupFeedback && conf.SetupLog))
+                        !(conf.SetupAbout && conf.SetupFeedback && conf.SetupLog))
                 };
 
                 foreach (var category in categories)
@@ -845,8 +842,6 @@ public partial class PageSetupUI : IPageView
                 if (!conf.SetupLauncherMisc)
                     setupCount += 1;
                 if (!conf.SetupJava)
-                    setupCount += 1;
-                if (!conf.SetupUpdate)
                     setupCount += 1;
                 if (!conf.SetupGameLink)
                     setupCount += 1;
@@ -918,7 +913,6 @@ public partial class PageSetupUI : IPageView
         CheckHiddenSetupGameManage.Checked = isChecked;
         CheckHiddenLauncherMisc.Checked = isChecked;
         CheckHiddenSetupJava.Checked = isChecked;
-        CheckHiddenSetupUpdate.Checked = isChecked;
         CheckHiddenSetupGameLink.Checked = isChecked;
         CheckHiddenSetupAbout.Checked = isChecked;
         CheckHiddenSetupFeedback.Checked = isChecked;
@@ -937,7 +931,6 @@ public partial class PageSetupUI : IPageView
         CheckHiddenSetupGameManage.Checked = isChecked;
         CheckHiddenLauncherMisc.Checked = isChecked;
         CheckHiddenSetupJava.Checked = isChecked;
-        CheckHiddenSetupUpdate.Checked = isChecked;
         CheckHiddenSetupGameLink.Checked = isChecked;
         CheckHiddenSetupAbout.Checked = isChecked;
         CheckHiddenSetupFeedback.Checked = isChecked;
@@ -951,7 +944,7 @@ public partial class PageSetupUI : IPageView
         var conf = Config.Preference.Hide;
         // 判断是否全部勾选
         var allChecked = conf.SetupLaunch && conf.SetupUi && conf.SetupLauncherLanguage && conf.SetupJava &&
-                         conf.SetupUpdate && conf.SetupGameLink && conf.SetupAbout && conf.SetupFeedback &&
+                         conf.SetupGameLink && conf.SetupAbout && conf.SetupFeedback &&
                          conf.SetupLog && conf.SetupLauncherMisc && conf.SetupGameManage;
         CheckHiddenPageSetup.Checked = allChecked;
     }

@@ -31,7 +31,6 @@ public partial class PageSetupAboutViewModel : ViewModelBase
 
     public void Initialize()
     {
-        ShowMcmod = Lang.IsChineseMainland;
         if (_initialized) return;
         _initialized = true;
         LoadContributorsCommand.Execute(null);

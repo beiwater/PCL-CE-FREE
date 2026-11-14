@@ -41,16 +41,6 @@ public enum ColorTheme
 }
 
 /// <summary>
-/// 更新通道
-/// </summary>
-public enum UpdateChannel
-{
-    Release = 0,
-    Beta = 1,
-    Dev = 2
-}
-
-/// <summary>
 /// 游戏窗口大小模式
 /// </summary>
 public enum GameWindowSizeMode
@@ -104,17 +94,6 @@ public enum LinkRelayBehavior
 {
     Default = 0,
     ForceRelay = 1
-}
-
-/// <summary>
-/// 启动器更新行为
-/// </summary>
-public enum LauncherAutoUpdateBehavior
-{
-    DownloadAndInstall = 0,
-    DownloadAndAnnounce = 1,
-    AnnounceOnly = 2,
-    Disable = 3
 }
 
 public enum LauncherTitleType

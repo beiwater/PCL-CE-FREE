@@ -1524,6 +1524,7 @@
 
     <!-- Launch.Account.Microsoft -->
 
+    <sys:String x:Key="Launch.Account.Microsoft.Error.MissingClientId">This build needs a Microsoft application ID for sign-in. Use a configured build or set PCL_MS_CLIENT_ID and restart the launcher.</sys:String>
     <sys:String x:Key="Launch.Account.Microsoft.Error.OperationFailed">A Microsoft sign-in operation failed. See the details below.</sys:String>
     <sys:String x:Key="Launch.Account.Microsoft.Error.Unknown">Unknown error!</sys:String>
     <sys:String x:Key="Launch.Account.Microsoft.LoginFailed.Message">Microsoft login authentication failed.&#xA;Please consider disabling the 'Verify SSL certificates for Microsoft login' option in 'Settings → Miscellaneous' and try again.&#xA;&#xA;Original error message:</sys:String>

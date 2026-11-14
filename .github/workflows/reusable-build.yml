@@ -34,10 +34,18 @@ jobs:
         with:
           dotnet-version: 11.0.x
 
+      - name: Check Microsoft login configuration
+        env:
+          PCL_MS_CLIENT_ID: ${{ vars.MS_CLIENT_ID || secrets.CLIENT_ID }}
+        run: |
+          if [[ -z "${PCL_MS_CLIENT_ID//[[:space:]]/}" ]]; then
+            echo "::warning::Microsoft sign-in will require PCL_MS_CLIENT_ID at runtime. Configure the MS_CLIENT_ID repository variable to include the application ID in the build."
+          fi
+
       - name: Build Project
         env:
           PCL_WRITE_SECRET: '1'
-          PCL_MS_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          PCL_MS_CLIENT_ID: ${{ vars.MS_CLIENT_ID || secrets.CLIENT_ID }}
           PCL_CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
           PCL_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           PCL_NAID_CLIENT_ID: ${{ secrets.NAID_CLIENT_ID }}

@@ -3,6 +3,8 @@
 > **自用构建（beiwater/PCL-CE-FREE）**：已移除启动器 OTA 升级、离线／第三方登录的正版账号前置要求及地区功能限制。保留正常账号验证；服务器自身的验证和地区政策不受此修改影响。
 >
 > 构建包见本仓库 [GitHub Actions](https://github.com/beiwater/PCL-CE-FREE/actions/workflows/build-test.yml) 的 Artifacts。仅供自用，与上游官方发布无关；更新需手动替换。
+>
+> **正版登录**需要支持个人 Microsoft 账号和设备码登录、且获准访问 Minecraft Services 的应用 ID。打包时可设置 GitHub Actions 仓库变量 `MS_CLIENT_ID`（也兼容原有的 `CLIENT_ID` 密钥）。已打包的版本可通过启动进程的环境变量 `PCL_MS_CLIENT_ID` 提供 ID。
 
 <div align="center">
 

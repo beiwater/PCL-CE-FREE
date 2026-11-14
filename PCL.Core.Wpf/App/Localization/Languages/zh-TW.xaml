@@ -1524,6 +1524,7 @@
 
     <!-- Launch.Account.Microsoft -->
 
+    <sys:String x:Key="Launch.Account.Microsoft.Error.MissingClientId">此組建未設定 Microsoft 正版登入所需的應用程式 ID。請使用已設定的組建，或設定 PCL_MS_CLIENT_ID 後重新啟動啟動器。</sys:String>
     <sys:String x:Key="Launch.Account.Microsoft.Error.OperationFailed">Microsoft 登入操作失敗。請檢視錯誤詳情。</sys:String>
     <sys:String x:Key="Launch.Account.Microsoft.Error.Unknown">未知錯誤！</sys:String>
     <sys:String x:Key="Launch.Account.Microsoft.LoginFailed.Message">微軟登入驗證失敗，請考慮在 [設定 → 其他] 中關閉 [在微軟登入時驗證 SSL 證書]，然後再試。&#xA;&#xA;原始錯誤資訊：</sys:String>

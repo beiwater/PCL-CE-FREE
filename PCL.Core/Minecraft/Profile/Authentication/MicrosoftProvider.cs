@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using PCL.Core.App;
+using PCL.Core.App.Localization;
 using PCL.Core.IO.Net;
 using PCL.Core.IO.Net.Http;
 using PCL.Core.Minecraft.IdentityModel.OAuth;
@@ -27,9 +28,9 @@ public sealed class MicrosoftProvider : IAuthenticateProvider
 
     public MicrosoftProvider(string? clientId = null)
     {
-        _clientId = string.IsNullOrWhiteSpace(clientId) ? Secrets.MSOAuthClientId : clientId;
+        _clientId = (string.IsNullOrWhiteSpace(clientId) ? Secrets.MSOAuthClientId : clientId).Trim();
         if (string.IsNullOrWhiteSpace(_clientId))
-            throw new InvalidOperationException("Microsoft OAuth client id is not configured.");
+            throw new IdentityModelConfigurationException(Lang.Text("Launch.Account.Microsoft.Error.MissingClientId"));
     }
 
     public async Task<DeviceCodeData> GetDeviceCodeAsync(CancellationToken token)
